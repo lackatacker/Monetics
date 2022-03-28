@@ -36,8 +36,8 @@ def verifyCvv(digit,cvv):
     return 1
 #-----------------------------------------------------------------------------------------------------#
 def determineBrand(firstDigit):
-    if (firstDigit == '3'): brand = 'American Express'
-    if (firstDigit == '4'): brand = 'Visa'
-    if (firstDigit == '5'): brand = 'MasterCard'
-    if (firstDigit == '6'): brand = 'Discover'
-    return brand
+    if (firstDigit == '3'): issuingBank = 'American Express'
+    if (firstDigit == '4'): issuingBank = 'Visa'
+    if (firstDigit == '5'): issuingBank = 'MasterCard'
+    if (firstDigit == '6'): issuingBank = 'Discover'
+    return issuingBank

@@ -1,4 +1,5 @@
 from datetime import date
+import random
 #-----------------------------------------------------------------------------------------------------#
 def verifyLuhn(pan):
     sum = 0
@@ -35,9 +36,41 @@ def verifyCvv(digit,cvv):
     elif(digit==4 and cvv!=3):return 0
     return 1
 #-----------------------------------------------------------------------------------------------------#
-def determineBrand(firstDigit):
+def determineIssuerNetwork(firstDigit):
     if (firstDigit == '3'): issuingBankNetwork = 'American Express'
-    if (firstDigit == '4'): issuingBankNetwork = 'Visa'
-    if (firstDigit == '5'): issuingBankNetwork = 'MasterCard'
-    if (firstDigit == '6'): issuingBankNetwork = 'Discover'
+    elif (firstDigit == '4'): issuingBankNetwork = 'Visa'
+    elif (firstDigit == '5'): issuingBankNetwork = 'MasterCard'
+    elif (firstDigit == '6'): issuingBankNetwork = 'Discover'
+    else: issuingBankNetwork = 'Unknown'
     return issuingBankNetwork
+#-----------------------------------------------------------------------------------------------------#
+def calculateDigit(pan):
+    pan=pan[::-1]
+    count=0
+    sum=0
+    i=len(pan)-1
+    pan=[int(x) for x in pan]
+    while (count + 1) <= i:
+        u = pan[count] * 2
+        if u > 9: u = 1 + u % 10
+        sum += u + pan[count + 1]
+        count += 2
+    if (count == i):
+        u = pan[i] * 2
+    if u > 9: u = 1 + u % 10
+    sum += u
+    sum *= 9
+    return sum%10
+#------------------------------------------------------------------------------------------------------#
+def generateNCards(number,IssuerNetworkID):
+    count=0
+    while(count<number):
+        pan = ''
+        while (len(pan) < 14):
+            pan += str(random.randint(0, 9))
+        pan = str(IssuerNetworkID) + pan
+        pan += str(calculateDigit(pan))
+        print(str(count+1)+' : '+ pan)
+        count += 1
+
+

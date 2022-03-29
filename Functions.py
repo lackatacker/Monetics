@@ -70,7 +70,10 @@ def generateNCards(number,IssuerNetworkID):
             pan += str(random.randint(0, 9))
         pan = str(IssuerNetworkID) + pan
         pan += str(calculateDigit(pan))
-        print(str(count+1)+' : '+ pan)
+        print(str(count+1)+'-pan : '+ pan)
+        print('ExpiryDate: '+str(random.randint(1,12)).zfill(2)+'/'
+              +str(date.today().year%1000+random.randint(1,20)))
+        print("CVV: "+str(random.randint(0,999)).zfill(3))
         count += 1
 
 
